@@ -1,0 +1,47 @@
+table {
+  container: center;
+  width: 100%;
+  border: 2px solid grey;
+  border-radius: 5px;
+  border-color: aquamarine;
+
+}
+
+.mdc-data-table__table {
+  min-width: 50rem;
+}
+
+div {
+  margin: auto;
+  container: center;
+  width: 90%;
+  border: 2px solid grey;
+  border-radius: 8px;
+}
+
+
+
+button {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin: 16px 8px;
+}
+
+button:hover {
+  background-color: rgb(12, 78, 12);
+  scale: 1.02;
+}
+
+button:active {
+  background-color: rgb(2, 141, 2);
+  scale: 0.98;
+}
+
+button {
+  background-color: green;
+  color: white;
+
+}

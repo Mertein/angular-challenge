@@ -1,0 +1,17 @@
+<section>
+  <h1>
+    Login Form
+  </h1>
+  <p>Angular Demo</p>
+  <div class="container">
+    <form >
+      <img ngSrc="/assets/user.png" width="200" height="200"/>
+      <input  type="email" [formControl]="email"  max="30" min="6" placeholder="Email" />
+      <input type="password" placeholder="Password" max="30" min="6"   [formControl]="password" />
+      <button type="submit">Login</button>
+      <p>user: <strong>user&#64;demo.com</strong> pass: <strong>123456</strong> </p>
+    </form>
+  </div>
+</section>
+
+
