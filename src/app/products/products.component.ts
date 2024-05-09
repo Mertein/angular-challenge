@@ -1,42 +1,72 @@
 import {SelectionModel} from '@angular/cdk/collections';
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild, inject} from '@angular/core';
 import {FormControl, FormsModule, ReactiveFormsModule} from '@angular/forms';
-
-import {MatTableDataSource, MatTableModule} from '@angular/material/table';
-import {MatCheckboxModule} from '@angular/material/checkbox';
-import {MatButtonModule} from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import { ProductsService } from './../services/products.service';
-
-export interface Products {
-  title: string;
-  position: number;
-  price: number;
-  category: string;
-}
+import { MaterialModule } from '../material.module';
+import { MatTableDataSource } from '@angular/material/table';
+import { Products } from './interfaces/products';
+import { NgbdModalContent } from './components/modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-products',
   standalone: true,
-  imports: [MatTableModule, MatCheckboxModule, MatButtonModule, MatSelectModule,MatFormFieldModule, FormsModule, ReactiveFormsModule],
+  imports: [MaterialModule, ReactiveFormsModule,NgbdModalContent],
   templateUrl: './products.component.html',
-  styleUrl: './products.component.css'
+  styleUrl: './products.component.css',
+
 })
-export class ProductsComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'position', 'title', 'price', 'category'];
+export default class ProductsComponent implements OnInit {
+  displayedColumns: string[] = ['select', 'position', 'title', 'price', 'category', 'Actions'];
   selection = new SelectionModel<Products>(true, []);
   dataSource = new MatTableDataSource<Products>([]);
-  toppings = new FormControl('');
-  toppingList: string[] = ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
-
+  totalProducts = 0;
+  originalData: Products[] = []; // Mantén una copia de los datos originales
+  categories: string[] = [];
+  selectedCategory = new FormControl('');
+  private modalService = inject(NgbModal);
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
-    this.productsService.getProducts().subscribe((product) => {
-    this.dataSource = new MatTableDataSource<Products>(product);
+    this.productsService.getProducts().subscribe((products) => {
+      this.dataSource.data = products;
+      this.originalData = [...products]; // Guarda una copia de los datos originales
     });
+
+    this.productsService.getCategories().subscribe((categories) => {
+      this.categories = categories;
+    });
+
+    this.selectedCategory.valueChanges.subscribe((selectedCategory) => {
+      this.applyFilter(selectedCategory!);
+    });
+    this.totalProducts = this.dataSource.data.length;
+  }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(selectedCategory: string): void {
+    // Filtra los datos originales
+    let filteredData = this.originalData;
+    if (selectedCategory) {
+      filteredData = filteredData.filter(product => product.category.toLowerCase().includes(selectedCategory.toLowerCase()));
+    }
+
+    // Actualiza la tabla con los datos filtrados
+    this.dataSource.data = filteredData;
+
+    // Reinicia la paginación cuando se aplica un filtro
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
   /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
@@ -51,7 +81,6 @@ export class ProductsComponent implements OnInit {
       this.selection.clear();
       return;
     }
-
     this.selection.select(...this.dataSource.data);
   }
 
@@ -63,5 +92,24 @@ export class ProductsComponent implements OnInit {
     }
     return `${this.selection.isSelected(row) ? 'deselect' : 'select'} row ${row.position + 1}`;
   }
+
+  openModal(product: Products): void {
+    const {title, category, description, image, id, price, rating} = product;
+    const {rate} = rating;
+    const modalRef = this.modalService.open(NgbdModalContent);
+
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.category = category;
+    modalRef.componentInstance.price = price;
+    modalRef.componentInstance.image = image;
+    modalRef.componentInstance.rating = rate;
+    modalRef.componentInstance.description = description;
+    modalRef.componentInstance.id = id;
+  };
+
 }
+
+
+
+export { Products };
 

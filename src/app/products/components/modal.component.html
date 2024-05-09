@@ -1,0 +1,42 @@
+<!-- <div class="card-container">
+  <div class="card-container-left">
+    <h3 >{{title}}</h3>
+    <strong >{{category}}</strong>
+    <p >Price: {{price}}</p>
+    <p class="card-description">{{description}}</p>
+    <p class="card-rating">Rating: {{rating}} </p>
+  </div>
+  <div class="card-container-right">
+    <img src={{image}}/>
+    <button type="button" ngbAutofocus class="btn btn-secondary"
+    (click)="activeModal.close()">Close</button>
+  </div>
+
+</div> -->
+
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>{{title}}</mat-card-title>
+    <mat-card-subtitle>Category: {{category}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>
+      Price: {{price}}
+    </p>
+  </mat-card-content>
+  <mat-card-content>
+    <p>
+      Rating: {{rating}}
+    </p>
+  </mat-card-content>
+  <img mat-card-image src={{image}} alt="Photo of a Shiba Inu">
+  <mat-card-content>
+    <p>
+      {{description}}
+    </p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-raised-button  color="primary" (click)="activeModal.close()">Close</button>
+  </mat-card-actions>
+</mat-card>

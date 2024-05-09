@@ -1,0 +1,44 @@
+/* .card-container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding: 30px;
+  border: 1px solid grey;
+  gap: 3rem;
+}
+
+.card-container-left {
+  text-align: left;
+  width: 50%;
+}
+
+.card-description  {
+  height: 12rem !important;
+  overflow-y: auto;
+  margin: 8px 0 !important;
+}
+
+.card-container-left p {
+  text-align: left;
+  font-weight: normal;
+  margin: 0;
+
+}
+
+.card-container-right {
+  text-align: right;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+} */
+
+img {
+  height: 15rem;
+  width: 100%;
+  object-fit: contain;
+}
+
+button {
+  width: 100%;
+}

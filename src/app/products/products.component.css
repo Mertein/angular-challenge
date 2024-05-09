@@ -2,21 +2,23 @@ table {
   container: center;
   width: 100%;
   border: 2px solid grey;
-  border-radius: 5px;
-  border-color: aquamarine;
-
+  border-radius: 8px;
 }
 
-.mdc-data-table__table {
-  min-width: 50rem;
-}
 
 div {
   margin: auto;
+  padding-top: 16px;
   container: center;
   width: 90%;
-  border: 2px solid grey;
-  border-radius: 8px;
+}
+
+p {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 8px;
+  text-align: center;
+
 }
 
 
@@ -40,5 +42,27 @@ button:active {
   scale: 0.98;
 }
 
+.btn-info {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin: 16px 8px;
+  background-color: steelblue !important;
+  color: white !important;
+}
 
+.btn-info:hover {
+  background-color:rgb(43, 87, 123) !important;
+}
 
+mat-label {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin: 6px;
+}
+
+mat-divider {
+  margin-bottom: 20px;
+}
