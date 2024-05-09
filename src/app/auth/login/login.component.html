@@ -4,22 +4,26 @@
   </h1>
   <mat-divider/>
   <p>Angular Demo</p>
+  @if (!isLoggedIn) {
   <div class="container">
-    <form [formGroup]="userForm"  (ngSubmit)="login()">
-      <img ngSrc="/assets/user.png" width="200" height="200" priority/>
-      <input  type="email" formControlName="email"  max="30" min="6" placeholder="Email" />
-      <div *ngIf="emailFormField?.invalid && (emailFormField?.dirty || emailFormField?.touched)" class="error-container">
-        <p class="error-message">Please enter a valid email address.</p>
-      </div>
+      <form [formGroup]="userForm"  (ngSubmit)="login()">
+        <img ngSrc="/assets/user.png" width="200" height="200" priority/>
+        <input  type="email" formControlName="email"  max="30" min="6" placeholder="Email" />
+        <div *ngIf="emailFormField?.invalid && (emailFormField?.dirty || emailFormField?.touched)" class="error-container">
+          <p class="error-message">Please enter a valid email address.</p>
+        </div>
 
-      <input type="password" placeholder="Password" max="30" min="6"   formControlName="password" />
-      <div *ngIf="passwordFormField?.invalid && (passwordFormField?.dirty || passwordFormField?.touched)" class="error-container">
-        <p class="error-message">At least 6 characters.</p>
-      </div>
-      <button  [disabled]="!userForm.valid" type="submit">Login</button>
-      <p>user: <strong>user&#64;demo.com</strong> pass: <strong>123456</strong> </p>
-    </form>
+        <input type="password" placeholder="Password" max="30" min="6"   formControlName="password" />
+        <div *ngIf="passwordFormField?.invalid && (passwordFormField?.dirty || passwordFormField?.touched)" class="error-container">
+          <p class="error-message">At least 6 characters.</p>
+        </div>
+        <button  [disabled]="!userForm.valid" type="submit">Login</button>
+        <p>user: <strong>user&#64;demo.com</strong> pass: <strong>123456</strong> </p>
+      </form>
   </div>
+} @else {
+  <div class="alert alert-success">You are logged.</div>
+}
 </section>
 
 

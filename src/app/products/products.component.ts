@@ -9,7 +9,8 @@ import { NgbdModalContent } from './components/modal.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-
+import { StorageService } from '../services/storage.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-products',
   standalone: true,
@@ -23,16 +24,21 @@ export default class ProductsComponent implements OnInit {
   selection = new SelectionModel<Products>(true, []);
   dataSource = new MatTableDataSource<Products>([]);
   totalProducts = 0;
-  originalData: Products[] = []; // Mantén una copia de los datos originales
+  originalData: Products[] = [];
   categories: string[] = [];
   selectedCategory = new FormControl('');
+  isLoggedIn : boolean = false;
   private modalService = inject(NgbModal);
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsService: ProductsService, private storageService: StorageService, private router: Router) {}
 
   ngOnInit(): void {
+    this.isLoggedIn = this.storageService.isLoggedIn();
+    if(!this.isLoggedIn){
+      this.router.navigate(['/login']);
+    }
     this.productsService.getProducts().subscribe((products) => {
       this.dataSource.data = products;
       this.originalData = [...products]; // Guarda una copia de los datos originales

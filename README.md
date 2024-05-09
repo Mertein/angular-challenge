@@ -1,27 +1,24 @@
 # AngularChallenge
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
+Challenge: `Test de Angular de ADOCLIC`
+Consignas: `https://github.com/adoclicdotcom/prueba_angular_2`
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+To run the project and test the full functionality we need to start the frontend and backend.
 
-## Code scaffolding
+`npm start` or `ng serve` for the frontend in the port 4200. The application will automatically reload if you change any of the source files.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+`npm run backend` for the backend and consume the api in db.json file
 
-## Build
+## Important information
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+We can only login with the credentials that you will see in the login.
 
-## Running unit tests
+We use json-server to simulate a backend with endpoints.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
 
-## Running end-to-end tests
+## Unit testing and Docs
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+The files of interest to reproduce the errors are located in the documentation folder.
