@@ -32,7 +32,6 @@ export default class LoginComponent {
   isLoggedIn = false;
   isLoginFailed = false;
   errorMessage = '';
-  roles: string[] = [];
 
   constructor(private authService: AuthService, private storageService: StorageService) {}
 
@@ -48,7 +47,6 @@ export default class LoginComponent {
   ngOnInit(): void {
     if (this.storageService.isLoggedIn()) {
       this.isLoggedIn = true;
-      this.roles = this.storageService.getUser().roles;
     }
   }
 
@@ -63,7 +61,7 @@ export default class LoginComponent {
       error: (err: any) => {
         this.errorMessage = err.message;
         this.isLoginFailed = true;
-        alert('User not found or some data is incorrect. Please try again.  ');
+        alert('User not found or some data is incorrect. If you tried to log in with the provided credentials below and it didnt work, check if you have the backend running with npm run backend!.  ');
       }
     });
   }
