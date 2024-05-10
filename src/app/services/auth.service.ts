@@ -15,7 +15,7 @@ export class AuthService {
 
   login(email: string, password: string): Observable<any> {
     return this.http.get<any>('http://localhost:3000/signupUsersList').pipe(
-      map((res: any) => {
+      map((res: []) => {
         const user = res.find((a: any) => a.email === email && a.password === password);
         if (user) {
           return user;

@@ -39,9 +39,10 @@ export default class ProductsComponent implements OnInit {
     if(!this.isLoggedIn){
       this.router.navigate(['/login']);
     }
+
     this.productsService.getProducts().subscribe((products) => {
       this.dataSource.data = products;
-      this.originalData = [...products]; // Guarda una copia de los datos originales
+      this.originalData = [...products];
     });
 
     this.productsService.getCategories().subscribe((categories) => {
@@ -60,28 +61,23 @@ export default class ProductsComponent implements OnInit {
   }
 
   applyFilter(selectedCategory: string): void {
-    // Filtra los datos originales
     let filteredData = this.originalData;
     if (selectedCategory) {
       filteredData = filteredData.filter(product => product.category.toLowerCase().includes(selectedCategory.toLowerCase()));
     }
 
-    // Actualiza la tabla con los datos filtrados
     this.dataSource.data = filteredData;
 
-    // Reinicia la paginación cuando se aplica un filtro
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
   }
-  /** Whether the number of selected elements matches the total number of rows. */
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
   toggleAllRows() {
     if (this.isAllSelected()) {
       this.selection.clear();
@@ -91,7 +87,6 @@ export default class ProductsComponent implements OnInit {
   }
 
 
-  /** The label for the checkbox on the passed row */
   checkboxLabel(row?: Products): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;

@@ -24,4 +24,6 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Unit Testing and Documentation
 
-The files of interest to reproduce the errors are located in the documentation folder.
+- Run `npm test` to run the unit tests
+
+Most of the tests include comments explaining how to interpret the obtained results. They may not all be complete due to time constraints, but I will add them soon.

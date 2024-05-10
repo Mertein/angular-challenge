@@ -15,9 +15,12 @@
 
         <input type="password" placeholder="Password" max="30" min="6"   formControlName="password" />
         <div *ngIf="passwordFormField?.invalid && (passwordFormField?.dirty || passwordFormField?.touched)" class="error-container">
-          <p class="error-message">At least 6 characters.</p>
+
+          <p *ngIf="passwordFormField?.errors?.['required']" class="error-message">This field is required.</p>
+          <p *ngIf="passwordFormField?.errors?.['minlength']" class="error-message">At least 6 characters.</p>
+          <p *ngIf="passwordFormField?.errors?.['maxlength']" class="error-message">Maximum 30 characters.</p>
         </div>
-        <button  [disabled]="!userForm.valid" type="submit">Login</button>
+        <button  [disabled]="!userForm.valid || this.submitted" type="submit" class="submit">Login</button>
         <p>user: <strong>user&#64;demo.com</strong> pass: <strong>123456</strong> </p>
       </form>
   </div>

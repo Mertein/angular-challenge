@@ -31,7 +31,6 @@ export default class LoginComponent {
   })
   isLoggedIn = false;
   isLoginFailed = false;
-  errorMessage = '';
 
   constructor(private authService: AuthService, private storageService: StorageService) {}
 
@@ -51,17 +50,19 @@ export default class LoginComponent {
   }
 
   login(): void {
+    this.submitted = true;
     this.authService.login(this.userForm.value.email!, this.userForm.value.password!).subscribe({
       next: (user: any) => {
         this.storageService.saveUser(user);
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.reloadPage();
+        this.submitted = false;
       },
       error: (err: any) => {
-        this.errorMessage = err.message;
         this.isLoginFailed = true;
         alert('User not found or some data is incorrect. If you tried to log in with the provided credentials below and it didnt work, check if you have the backend running with npm run backend!.  ');
+        this.submitted = false;
       }
     });
   }

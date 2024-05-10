@@ -30,6 +30,7 @@ export class AppComponent {
   }
 
   logout(): void {
+    this.storageService.clean();
     // this.authService.logout().subscribe({
     //   next: res => {
     //     console.log(res);
@@ -40,6 +41,5 @@ export class AppComponent {
     //     console.log(err);
     //   }
     // });
-    this.storageService.clean();
   }
 }
