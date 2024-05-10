@@ -16,7 +16,7 @@ To run the project and test the full functionality, we need to start both the fr
 
 ## Important Information
 
-We can only log in with the credentials provided on the login page.
+We can only login with the credentials provided on the login page and running json-server to simulate api with backend.
 
 We use json-server to simulate a backend with endpoints.
 
